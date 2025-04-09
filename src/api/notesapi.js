@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api/notes',
+  baseURL: 'https://notes-api-backend-iwuw.onrender.com',
 });
 
 export const fetchNotes = () => API.get('/');
