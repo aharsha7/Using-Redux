@@ -1,0 +1,269 @@
+body {
+  background-color: white;
+  margin: 0;
+  padding: 5px;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  background-image: url("/bg-image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100%;
+  z-index: 1;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+h1 {
+  top: 0;
+  left: -10px;
+  color: white;
+  font-size: 105rem;
+  margin: 0 52px;
+  font-size: 55px;
+  position: relative;
+}
+
+.note-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 5px;
+}
+
+@keyframes pop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1.0); opacity: 1; }
+}
+.note-card {
+  width: 300px;
+  max-width: 300px;
+  max-height: 300px;
+  height: 300px;
+  margin-top: 1px;
+  background: white;
+  padding: 15px;
+  border-radius: 40px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-x:hidden;
+  animation: pop 0.3s ease;
+}
+
+.note-title {
+  margin-top: 65px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: left;
+  position: relative;
+  top: -80px;
+  border-bottom: 3px solid black;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  overflow-y: auto;
+  max-width:290px;
+}
+
+.note-description {
+  margin-top: 1px;
+  font-size: 20px;
+  font-weight: bold;
+  color: darkblack;
+  text-align: left;
+  position: relative;
+  top: -95px;
+  max-width:290px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  overflow-y: auto;
+}
+
+.tab-btn {
+  margin: 5px;
+  background-color: palevioletred;
+  color: white;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.tab-btn:hover {
+  background-color: lightblue;
+  color: black;
+  transform: scale(1.05);
+}
+
+.notes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 40px; 
+  padding: 25px;
+  margin-left: 5px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 35px;
+}
+
+.search-bar {
+  width: 280px;
+  border-radius: 8px;
+  height: 45px;
+  margin: 10px;
+}
+
+.filter-tabs {
+  margin-right: 15px;
+}
+
+.note-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.note-card p {
+  font-size: 18px;
+}
+
+.note-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  gap: 8px;
+}
+
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: bold;
+  color: darkblack;
+  padding-top: 5px;
+  border-top: 1px solid black;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filter-tabs {
+    position: relative;
+    justify-content: center;
+    margin-left: -30px;
+    margin-top: 10px;
+  }
+
+  .notes-grid {
+    justify-content: center;
+  }
+
+  .search-bar {
+    width: 270px;
+    max-width: 270px;
+    border-radius: 8px;
+    height: 45px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: -25px;
+    justify-content: center;
+  }
+
+  h1 {
+    text-align: center;
+    margin: 0 auto;
+    margin-left: -25px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .notes-grid {
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
+
+  .filter-tabs {
+    justify-content: center;
+    text-align: center;
+  }
+  .search-bar {
+    width: 270px;
+    max-width: 270px;
+    margin-bottom: 10px;
+    justify-content: center;
+  }
+}
+
+.edit-btn,
+.delete-btn {
+  background: rgb(252, 252, 252);
+  border: 1px solid black;
+  cursor: pointer;
+  font-size: 13px;
+  transition: transform 0.2s;
+  border-radius: 50%;
+  padding: 5px;
+  color: #555;
+  margin: 0;
+  justify-content: right;
+}
+
+.date-left {
+  text-align: left;
+}
+
+.time-right {
+  text-align: right;
+}
+
+.edit-btn:hover {
+  color: rgb(24, 92, 227);
+  transform: scale(1.5);
+}
+
+.delete-btn:hover {
+  color: rgb(255, 0, 0);
+  transform: scale(1.5);
+}
+
+.add-card {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #ccc;
+  color: #555;
+  cursor: pointer;
+  order: -1;
+  max-width: 300px;
+  margin-left: 0;
+  overflow:hidden;
+}
+
+.add-card:hover {
+  border-color: rgb(4, 125, 255);
+}
+
