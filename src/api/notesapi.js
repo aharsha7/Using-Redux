@@ -3,7 +3,7 @@ import axios from 'axios';
 const baseURL = "https://notes-api-backend-iwuw.onrender.com/api/notes";
 // const baseURL = "http://localhost:5000/api/notes";
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api/notes',
+  baseURL: baseURL,
 });
 
 export const fetchNotes = () => API.get('/');
