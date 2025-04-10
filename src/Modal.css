@@ -52,12 +52,12 @@
 }
 
 .modal-actions button:first-child {
-  background-color: #007bff;
+  background-color: #f44336;
   color: white;
 }
 
 .modal-actions button:last-child {
-  background-color: #ccc;
+  background-color: #007bff;
 }
 
 @media (max-width: 480px) {

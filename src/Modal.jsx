@@ -4,6 +4,8 @@ import React from "react";
 const Modal = ({ isOpen, onClose, onConfirm, title, description, setTitle, setDescription, type }) => {
   if (!isOpen) return null;
 
+  const actionLabel = type === "add" ? "Add" : type === "update" ? "Update" : "Confirm";
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -25,8 +27,8 @@ const Modal = ({ isOpen, onClose, onConfirm, title, description, setTitle, setDe
         )}
         {type === "delete" && <p>Are you sure you want to delete this note?</p>}
         <div className="modal-actions">
-          <button onClick={onConfirm}>Confirm</button>
           <button onClick={onClose}>Cancel</button>
+          <button onClick={onConfirm}>{actionLabel}</button>
         </div>
       </div>
     </div>
