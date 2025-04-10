@@ -58,6 +58,7 @@
 
 .modal-actions button:last-child {
   background-color: #007bff;
+  color: white;
 }
 
 @media (max-width: 480px) {
