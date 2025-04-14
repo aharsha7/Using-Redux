@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Modal from "./Modal";
-import { fetchNotes, createNote, updateNote, deleteNote } from "./api/notesapi";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Modal from "./components/Modal";
+import {loadNotes,addNote,editNote,removeNote} from "./features/notesSlice";
 
-const App = () => {
-  const [notes, setNotes] = useState([]);
+const MyNotes = () => {
+  const dispatch = useDispatch();
+  const notes = useSelector((state) => state.notes.list);
+
   const [modalOpen, setModalOpen] = useState(false);
   const [currentNoteId, setCurrentNoteId] = useState(null);
   const [modalType, setModalType] = useState("");
@@ -13,17 +16,8 @@ const App = () => {
   const [filteredNotes, setFilteredNotes] = useState([]);
 
   useEffect(() => {
-    const loadNotes = async () => {
-      try {
-        const res = await fetchNotes();
-        setNotes(res.data);
-        setFilteredNotes(res.data);
-      } catch (err) {
-        console.error("Failed to load notes", err);
-      }
-    };
-    loadNotes();
-  }, []);
+    dispatch(loadNotes());
+  }, [dispatch]);
 
   useEffect(() => {
     setFilteredNotes(notes);
@@ -33,7 +27,7 @@ const App = () => {
     setModalType(type);
     setCurrentNoteId(id);
     if (type === "update" && id) {
-      const note = notes.find((note) => note._id === id);
+      const note = notes.find((n) => n._id === id);
       setTitle(note.title);
       setDescription(note.description);
     } else {
@@ -49,52 +43,35 @@ const App = () => {
     setDescription("");
   };
 
-  const handleAdd = async () => {
+  const handleAdd = () => {
     if (title && description) {
-      try {
-        const timestamp = new Date();
-        const newNote = {
-          title,
-          description,
-          createdAt: timestamp,
-          updatedAt: timestamp,
-          color: getRandomColor(),
-        };
-        const res = await createNote(newNote);
-        setNotes([res.data, ...notes]);
-      } catch (err) {
-        console.error("Failed to add note", err);
-      }
+      const timestamp = new Date();
+      const newNote = {
+        title,
+        description,
+        createdAt: timestamp,
+        updatedAt: timestamp,
+        color: getRandomColor(),
+      };
+      dispatch(addNote(newNote));
+      closeModal();
     }
-    closeModal();
   };
 
-  const handleUpdate = async () => {
+  const handleUpdate = () => {
     if (title && description) {
-      try {
-        const updatedNote = {
-          title,
-          description,
-          updatedAt: new Date(),
-        };
-        const res = await updateNote(currentNoteId, updatedNote);
-        setNotes(
-          notes.map((note) => (note._id === currentNoteId ? res.data : note))
-        );
-      } catch (err) {
-        console.error("Failed to update note", err);
-      }
+      const updatedNote = {
+        title,
+        description,
+        updatedAt: new Date(),
+      };
+      dispatch(editNote({ id: currentNoteId, note: updatedNote }));
+      closeModal();
     }
-    closeModal();
   };
 
-  const handleDelete = async () => {
-    try {
-      await deleteNote(currentNoteId);
-      setNotes(notes.filter((note) => note._id !== currentNoteId));
-    } catch (err) {
-      console.error("Failed to delete note", err);
-    }
+  const handleDelete = () => {
+    dispatch(removeNote(currentNoteId));
     closeModal();
   };
 
@@ -116,7 +93,8 @@ const App = () => {
 
     if (filterType === "today") {
       filtered = notes.filter(
-        (note) => new Date(note.createdAt).toDateString() === now.toDateString()
+        (note) =>
+          new Date(note.createdAt).toDateString() === now.toDateString()
       );
     } else if (filterType === "lastWeek") {
       const oneWeekAgo = new Date();
@@ -135,13 +113,13 @@ const App = () => {
           new Date(note.createdAt) < oneMonthAgo
       );
     }
+
     setFilteredNotes(filtered);
   };
 
   const getRandomColor = () => {
-    const colors =  ["#FFFFCC", "#CCFFCC","#CCE5FF","#B0E0E6","#FFE4E1","#FFEBCC",
-       "#FFD6E0", "#D6EAF8", "#D5F5E3", "#FDEBD0"];
-    
+    const colors = [
+      "#FFFFCC","#CCFFCC","#CCE5FF","#B0E0E6","#FFE4E1","#FFEBCC","#FFD6E0","#D6EAF8","#D5F5E3","#FDEBD0"];
     return colors[Math.floor(Math.random() * colors.length)];
   };
 
@@ -151,11 +129,12 @@ const App = () => {
       <div className="navbar">
         <input
           type="text"
-          placeholder="🔍Search Notes..."
+          placeholder="🔍 Search Notes..."
           value={search}
           onChange={handleSearch}
           className="search-bar"
         />
+
         <div className="filter-tabs">
           <button onClick={() => handleFilter("today")} className="tab-btn">
             Today
@@ -235,4 +214,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default MyNotes;
