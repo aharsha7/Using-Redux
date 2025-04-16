@@ -49,6 +49,7 @@
 .modal-actions button:hover {
   transform: scale(1.05);
   border: 1px solid black;
+  border-radius: 80px;
 }
 
 .modal-actions button:last-child {

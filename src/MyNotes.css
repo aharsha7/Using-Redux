@@ -241,12 +241,12 @@ h1 {
 
 .edit-btn:hover {
   color: rgb(24, 92, 227);
-  transform: scale(1.5);
+  transform: scale(1.2);
 }
 
 .delete-btn:hover {
   color: rgb(255, 0, 0);
-  transform: scale(1.5);
+  transform: scale(1.2);
 }
 
 .add-card {
