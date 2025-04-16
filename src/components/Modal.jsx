@@ -3,7 +3,7 @@ import React from "react";
 const Modal = ({ isOpen, onClose, onConfirm, title, description, setTitle, setDescription, type }) => {
   if (!isOpen) return null;
 
-  const actionLabel = type === "add" ? "Add" : type === "update" ? "Update" : "Confirm";
+  const actionLabel = type === "add" ? "Add Note" : type === "update" ? "Update" : "Confirm";
   
   return (
     <div className="modal-overlay">

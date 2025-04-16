@@ -21,7 +21,7 @@ export const removeNote = createAsyncThunk('notes/delete', async (id) => {
   return id;
 });
 
-const notesSlice = createSlice({
+  const notesSlice = createSlice({
   name: 'notes',
   initialState: {
     list: [],

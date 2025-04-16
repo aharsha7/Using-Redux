@@ -90,8 +90,10 @@ const MyNotes = () => {
   const handleFilter = (filterType) => {
     const now = new Date();
     let filtered = notes;
-
-    if (filterType === "today") {
+    if (filterType === "all") {
+      filtered = notes;
+    }
+    else if (filterType === "today") {
       filtered = notes.filter(
         (note) =>
           new Date(note.createdAt).toDateString() === now.toDateString()
@@ -136,6 +138,9 @@ const MyNotes = () => {
         />
 
         <div className="filter-tabs">
+          <button onClick={() => handleFilter("all")} className="tab-btn">
+            All Notes
+          </button>
           <button onClick={() => handleFilter("today")} className="tab-btn">
             Today
           </button>
@@ -198,12 +203,7 @@ const MyNotes = () => {
         isOpen={modalOpen}
         onClose={closeModal}
         onConfirm={
-          modalType === "add"
-            ? handleAdd
-            : modalType === "update"
-            ? handleUpdate
-            : handleDelete
-        }
+          modalType === "add" ? handleAdd : modalType === "update" ? handleUpdate : handleDelete}
         title={modalType !== "delete" ? title : undefined}
         description={modalType !== "delete" ? description : undefined}
         setTitle={setTitle}
