@@ -59,7 +59,7 @@ h1 {
   flex-direction: column;
   justify-content: space-between;
   overflow-x:hidden;
-  animation: pop 0.3s ease;
+  animation: pop 0.1s ease;
 }
 
 .note-title {
