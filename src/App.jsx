@@ -1,7 +1,7 @@
 import React from "react";
 import MyNotes from "./MyNotes";
 import "./MyNotes.css";
-import "./Modal.css";
+import "./components/Modal.css";
 
 const App = () => {
   return (

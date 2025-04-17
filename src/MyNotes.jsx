@@ -90,6 +90,7 @@ const MyNotes = () => {
   const handleFilter = (filterType) => {
     const now = new Date();
     let filtered = notes;
+    
     if (filterType === "all") {
       filtered = notes;
     }
